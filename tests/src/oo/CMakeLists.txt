@@ -51,5 +51,3 @@ foreach(CXXFILE ${CXXPROGS})
   get_filename_component(EXENAME ${CXXFILE} NAME_WE)
   add_executable(${EXENAME} ${CXXFILE})
 endforeach(CXXFILE)
-
-set_property(TARGET oonewdel PROPERTY CXX_STANDARD 17)
