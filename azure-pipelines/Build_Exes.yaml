@@ -8,12 +8,15 @@ parameters:
   cmakeAlwaysFlags: "-A win32"
   variants:
     - CXXFLAGS: ""
+      LDFLAGS: ""
       VARIANT: "normal"
       CMAKEFLAGS: "-D CMAKE_MSVC_WPO=OFF"
-    - CXXFLAGS: "/OPT:ICF"
+    - CXXFLAGS: ""
+      LDFLAGS: "/OPT:ICF"
       VARIANT: "icf"
       CMAKEFLAGS: "-D CMAKE_MSVC_WPO=OFF"
     - CXXFLAGS: ""
+      LDFLAGS: ""
       VARIANT: "wpo"
       CMAKEFLAGS: "-D CMAKE_MSVC_WPO=ON"
 
@@ -51,7 +54,7 @@ jobs:
         mkdir build-${{ v.VARIANT }}
         cd build-${{ v.VARIANT }}
         echo "##vso[task.prependpath]%ProgramFiles%\\cmake\\bin"
-        cmake.exe -E env CXXFLAGS="${{ v.CXXFLAGS }}" cmake.exe ${{ parameters.cmakeAlwaysFlags }} ${{ v.CMAKEFLAGS }} -G "${{ parameters.cmakeGenName }}" ..
+        cmake.exe -E env CXXFLAGS="${{ v.CXXFLAGS }}" LDFLAGS="${{ v.LDFLAGS }}" cmake.exe ${{ parameters.cmakeAlwaysFlags }} ${{ v.CMAKEFLAGS }} -G "${{ parameters.cmakeGenName }}" ..
         cmake.exe --build . --verbose --config Debug
         cmake.exe --build . --verbose --config Lite || VER>NUL
         cmake.exe --build . --verbose --config Release
