@@ -9,7 +9,10 @@ parameters:
   variants:
     - CXXFLAGS: ""
       VARIANT: "normal"
-      CMAKEFLAGS: "-D CMAKE_MSVC_STATIC=OFF"
+      CMAKEFLAGS: "-D CMAKE_MSVC_WPO=OFF"
+    - CXXFLAGS: ""
+      VARIANT: "wpo"
+      CMAKEFLAGS: "-D CMAKE_MSVC_WPO=ON"
 
 jobs:
 - job: Build_Exes_${{parameters.name}}
