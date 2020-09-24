@@ -15,9 +15,9 @@ parameters:
       LDFLAGS: "/OPT:ICF /OPT:REF"
       VARIANT: "icf"
       CMAKEFLAGS: "-D CMAKE_MSVC_WPO=OFF"
-    - CXXFLAGS: ""
+    - CXXFLAGS: "/OPT:ICF /OPT:REF"
       LDFLAGS: ""
-      VARIANT: "wpo"
+      VARIANT: "icf_wpo"
       CMAKEFLAGS: "-D CMAKE_MSVC_WPO=ON"
 
 jobs:
