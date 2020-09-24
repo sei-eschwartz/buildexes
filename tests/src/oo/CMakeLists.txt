@@ -46,12 +46,28 @@ if(WIN32)
   endif()
 endif()
 
+
 FILE(GLOB CXXPROGS *.cpp)
 
 foreach(CXXFILE ${CXXPROGS})
   get_filename_component(EXENAME ${CXXFILE} NAME_WE)
   add_executable(${EXENAME} ${CXXFILE})
   if(CMAKE_MSVC_WPO)
-    set_property(TARGET ${EXENAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO TRUE)
+    set_property(TARGET ${EXENAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+  endif()
+  # Produce PDBs for Release
+  if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" AND CMAKE_BUILD_TYPE MATCHES "Release")
+    target_compile_options(${EXENAME} PRIVATE /Zi)
+
+    # Tell linker to include symbol data
+    set_target_properties(${EXENAME} PROPERTIES 
+      LINK_FLAGS "/INCREMENTAL:NO /DEBUG /OPT:REF /OPT:ICF"
+      )
+
+    # Set file name & location
+    set_target_properties(${EXENAME} PROPERTIES 
+      COMPILE_PDB_NAME ${EXENAME} 
+      COMPILE_PDB_OUTPUT_DIR ${CMAKE_BINARY_DIR}
+      )
   endif()
 endforeach(CXXFILE)

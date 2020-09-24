@@ -12,12 +12,8 @@ parameters:
       VARIANT: "normal"
       CMAKEFLAGS: "-D CMAKE_MSVC_WPO=OFF"
     - CXXFLAGS: ""
-      LDFLAGS: "/OPT:ICF /OPT:REF"
-      VARIANT: "icf"
-      CMAKEFLAGS: "-D CMAKE_MSVC_WPO=OFF"
-    - CXXFLAGS: "/OPT:ICF /OPT:REF"
       LDFLAGS: ""
-      VARIANT: "icf_wpo"
+      VARIANT: "wpo"
       CMAKEFLAGS: "-D CMAKE_MSVC_WPO=ON"
 
 jobs:
