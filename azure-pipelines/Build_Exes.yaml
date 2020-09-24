@@ -51,6 +51,7 @@ jobs:
         cmake.exe -E env CXXFLAGS="${{ v.CXXFLAGS }}" cmake.exe ${{ parameters.cmakeAlwaysFlags }} ${{ v.CMAKEFLAGS }} -G "${{ parameters.cmakeGenName }}" ..
         cmake.exe --build . --verbose --config Debug
         cmake.exe --build . --verbose --config Lite || VER>NUL
+        cmake.exe --build . --verbose --config Release
         cmake.exe --build . --verbose --config RelWithDebInfo
         mkdir "%variantDir%"
         move Debug "%variantDir%"
