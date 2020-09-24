@@ -1,0 +1,60 @@
+parameters:
+  name: ""
+  chocoPackages: []
+  displayName: ""
+  cmakeGenName: ""
+  vmImage: "windows-latest"
+  # Default to 32-bit
+  cmakeAlwaysFlags: "-A win32"
+  variants:
+    - CXXFLAGS: ""
+      VARIANT: "normal"
+      CMAKEFLAGS: "-D CMAKE_MSVC_STATIC=OFF"
+
+jobs:
+- job: Build_Exes_${{parameters.name}}
+  condition: and(succeeded(), variables.buildExes)
+  displayName: Build Exes using ${{parameters.displayName}}
+  pool:
+    vmImage: ${{ parameters.vmImage }}
+  variables:
+    PUBLISH_DIR: $(Pipeline.Workspace)/publish
+    DOWNLOAD_DIR: $(Pipeline.Workspace)/cvdump
+    CVDUMP_EXE: $(DOWNLOAD_DIR)/cvdump.exe
+    CVDUMP_URL: 'https://github.com/microsoft/microsoft-pdb/raw/master/cvdump/cvdump.exe'
+    PIP_CACHE_DIR: $(Pipeline.Workspace)/pipcache
+  steps:
+  - task: Cache@2
+    inputs:
+      key: 'choclatey | "$(Agent.OS)" | "${{ parameters.chocoPackage }}" '
+      # Even if we don't have a cache for chocoPackage, better to use _a_ cache since it should include cmake
+      restoreKeys: |
+        choclatey | "$(Agent.OS)"
+      path: $(CHOCLATEY_CACHE_DIR)
+    displayName: Choclatey cache
+  - script: choco config set cacheLocation "$(CHOCLATEY_CACHE_DIR)"
+    displayName: Set choclatey cache dir
+  - script: choco install -y cmake
+    displayName: Install cmake
+  - ${{ each p in parameters.chocoPackages }}:
+    - script: choco install -y ${{ p }}
+      displayName: Install ${{ parameters.displayName }} (${{ p }})
+  - ${{ each v in parameters.variants }}:
+    - script: |
+        @echo on
+        cd tests/src/oo
+        mkdir build-${{ v.VARIANT }}
+        cd build-${{ v.VARIANT }}
+        echo "##vso[task.prependpath]%ProgramFiles%\\cmake\\bin"
+        cmake.exe -E env CXXFLAGS="${{ v.CXXFLAGS }}" cmake.exe ${{ parameters.cmakeAlwaysFlags }} ${{ v.CMAKEFLAGS }} -G "${{ parameters.cmakeGenName }}" ..
+        cmake.exe --build . --verbose --config Debug
+        cmake.exe --build . --verbose --config Lite || VER>NUL
+        cmake.exe --build . --verbose --config RelWithDebInfo
+        mkdir "%variantDir%"
+        move Debug "%variantDir%"
+        move Lite "%variantDir%"
+        move RelWithDebInfo "%variantDir%"
+      displayName: Build variant ${{ v.VARIANT }}
+      env:
+        variantDir: "$(PUBLISH_DIR)\\${{ parameters.name }}\\${{ v.VARIANT }}"
+  - publish: $(PUBLISH_DIR)
