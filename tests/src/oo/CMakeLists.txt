@@ -34,10 +34,10 @@ if(WIN32)
   # Add a Lite configuration if we have one
   if(CMAKE_CONFIGURATION_TYPES)
     if(CMAKE_CXX_FLAGS_LITE)
-      set(CMAKE_CONFIGURATION_TYPES Debug RelWithDebInfo Lite)
+      set(CMAKE_CONFIGURATION_TYPES Debug RelWithDebInfo Release Lite)
 
     else()
-      set(CMAKE_CONFIGURATION_TYPES Debug RelWithDebInfo)
+      set(CMAKE_CONFIGURATION_TYPES Debug Release RelWithDebInfo)
     endif()
     set(CMAKE_CONFIGURATION_TYPES "${CMAKE_CONFIGURATION_TYPES}" CACHE STRING
       "Reset the configurations to what we need"
