@@ -12,7 +12,7 @@ parameters:
       VARIANT: "normal"
       CMAKEFLAGS: "-D CMAKE_MSVC_WPO=OFF"
     - CXXFLAGS: ""
-      LDFLAGS: "/OPT:ICF"
+      LDFLAGS: "/OPT:ICF /OPT:REF"
       VARIANT: "icf"
       CMAKEFLAGS: "-D CMAKE_MSVC_WPO=OFF"
     - CXXFLAGS: ""
