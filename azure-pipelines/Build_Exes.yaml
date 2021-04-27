@@ -3,7 +3,7 @@ parameters:
   chocoPackages: []
   displayName: ""
   cmakeGenName: ""
-  vmImage: "windows-latest"
+  vmImage: "vs2017-win2016"
   # Default to 32-bit
   cmakeAlwaysFlags: "-A win32"
   variants:
