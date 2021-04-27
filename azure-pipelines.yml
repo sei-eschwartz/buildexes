@@ -6,7 +6,7 @@ jobs:
   parameters:
     name: "vs2008"
     chocoPackages:
-    - "visualcplusplusexpress2008"
+    - "visualstudioexpress2008"
     displayName: "Visual C++ Express 2008"
     cmakeGenName: "Visual Studio 9 2008"
 
