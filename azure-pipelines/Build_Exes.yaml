@@ -1,7 +1,6 @@
 parameters:
   name: ""
   chocoPackages: []
-  chocoFlags: ""
   displayName: ""
   cmakeGenName: ""
   vmImage: "windows-latest"
@@ -37,13 +36,13 @@ jobs:
         choclatey | "$(Agent.OS)"
       path: $(CHOCLATEY_CACHE_DIR)
     displayName: Choclatey cache
+  - script: choco source add -n=ed "$(CHOCLATEY_REPO)"
   - script: choco config set cacheLocation "$(CHOCLATEY_CACHE_DIR)"
     displayName: Set choclatey cache dir
   - script: choco install -y cmake
     displayName: Install cmake
   - ${{ each p in parameters.chocoPackages }}:
-      - script: echo What the ${{ parameters.chocoFlags }}
-      - script: choco install -y ${{ parameters.chocoFlags }} ${{ p }}
+      - script: choco install -y ${{ p }}
       displayName: Install ${{ parameters.displayName }} (${{ p }})
       continueOnError: true
   - script: cat D:\a\1/choclatey_cache\vs.log

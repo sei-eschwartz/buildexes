@@ -1,5 +1,6 @@
 variables:
   CHOCLATEY_CACHE_DIR: $(Pipeline.Workspace)/choclatey_cache
+  CHOCLATEY_REPO: https://pkgs.dev.azure.com/edmcman/choco-vc/_packaging/choco-vc@Local/nuget/v2
 
 jobs:
 - template: azure-pipelines/Build_Exes.yaml
@@ -7,7 +8,6 @@ jobs:
     name: "vs2008"
     chocoPackages:
     - "msvisualcpp-2008sp1express"
-    chocoFlags: "--source 'https://pkgs.dev.azure.com/edmcman/choco-vc/_packaging/choco-vc@Local/nuget/v2'"
     displayName: "Visual C++ Express 2008"
     cmakeGenName: "Visual Studio 9 2008"
 
