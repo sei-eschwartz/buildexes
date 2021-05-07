@@ -36,7 +36,7 @@ jobs:
         choclatey | "$(Agent.OS)"
       path: $(CHOCLATEY_CACHE_DIR)
     displayName: Choclatey cache
-  - script: choco source add -n=ed "$(CHOCLATEY_REPO)"
+  - script: choco source add -n=ed -s "$(CHOCLATEY_REPO)"
     displayName: Add chocolatey repo
   - script: choco config set cacheLocation "$(CHOCLATEY_CACHE_DIR)"
     displayName: Set choclatey cache dir
