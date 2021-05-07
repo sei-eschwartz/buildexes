@@ -46,9 +46,6 @@ jobs:
     - script: choco install -y ${{ p }}
       displayName: Install ${{ parameters.displayName }} (${{ p }})
       continueOnError: true
-  - script: cat D:\a\1/choclatey_cache\vs.log
-    displayName: Debug
-    condition: always()
   - ${{ each v in parameters.variants }}:
     - script: |
         @echo on
