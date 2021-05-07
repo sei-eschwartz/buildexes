@@ -1,6 +1,7 @@
 parameters:
   name: ""
   chocoPackages: []
+  chocoFlags: ""
   displayName: ""
   cmakeGenName: ""
   vmImage: "windows-latest"
@@ -41,7 +42,7 @@ jobs:
   - script: choco install -y cmake
     displayName: Install cmake
   - ${{ each p in parameters.chocoPackages }}:
-    - script: choco install -y ${{ p }}
+    - script: choco install -y ${{ parameters.chocoFlags}} ${{ p }}
       displayName: Install ${{ parameters.displayName }} (${{ p }})
       continueOnError: true
   - script: cat D:\a\1/choclatey_cache\vs.log
