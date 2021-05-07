@@ -30,7 +30,7 @@ jobs:
   steps:
   - task: Cache@2
     inputs:
-      key: 'choclatey | "$(Agent.OS)" | ${{ join(',', parameters.chocoPackages) }} '
+      key: 'choclatey | "$(Agent.OS)" | ${{ join(\',\', parameters.chocoPackages) }} '
       # Even if we don't have a cache for chocoPackage, better to use _a_ cache since it should include cmake
       restoreKeys: |
         choclatey | "$(Agent.OS)"
