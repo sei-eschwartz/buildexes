@@ -43,7 +43,7 @@ jobs:
   - script: choco install -y cmake
     displayName: Install cmake
   - ${{ each p in parameters.chocoPackages }}:
-    - script: choco install -d -y ${{ p }}
+    - script: choco install --pre -d -y ${{ p }}
       displayName: Install ${{ parameters.displayName }} (${{ p }})
       continueOnError: true # for debugging
   - script: cat D:\a\1/choclatey_cache\vs.log
