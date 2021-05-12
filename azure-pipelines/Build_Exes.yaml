@@ -48,7 +48,8 @@ jobs:
       # continueOnError: true # for debugging
   - script: |
       cat $(CHOCLATEY_CACHE_DIR)\vs.log
-      fail
+      cat C:\ProgramData\chocolatey\logs\chocolatey.log
+      fail >nul
     displayName: Debug
     condition: failed()
   - ${{ each v in parameters.variants }}:
