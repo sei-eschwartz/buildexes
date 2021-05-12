@@ -30,16 +30,16 @@ jobs:
   steps:
   - task: Cache@2
     inputs:
-      key: 'choclatey | "$(Agent.OS)" | ${{ join(1, parameters.chocoPackages) }} '
+      key: 'chocolatey | "$(Agent.OS)" | ${{ join(1, parameters.chocoPackages) }} '
       # Even if we don't have a cache for chocoPackage, better to use _a_ cache since it should include cmake
       restoreKeys: |
-        choclatey | "$(Agent.OS)"
-      path: $(CHOCLATEY_CACHE_DIR)
-    displayName: Choclatey cache
-  - script: choco source add -n=ed -s "$(CHOCLATEY_REPO)"
+        chocolatey | "$(Agent.OS)"
+      path: $(CHOCOLATEY_CACHE_DIR)
+    displayName: Chocolatey cache
+  - script: choco source add -n=ed -s "$(CHOCOLATEY_REPO)"
     displayName: Add chocolatey repo
-  - script: choco config set cacheLocation "$(CHOCLATEY_CACHE_DIR)"
-    displayName: Set choclatey cache dir
+  - script: choco config set cacheLocation "$(CHOCOLATEY_CACHE_DIR)"
+    displayName: Set chocolatey cache dir
   - script: choco install -y cmake
     displayName: Install cmake
   - ${{ each p in parameters.chocoPackages }}:
@@ -47,7 +47,7 @@ jobs:
       displayName: Install ${{ parameters.displayName }} (${{ p }})
       # continueOnError: true # for debugging
   - script: |
-      cat $(CHOCLATEY_CACHE_DIR)\vs.log
+      cat $(CHOCOLATEY_CACHE_DIR)\vs.log
       cat C:\ProgramData\chocolatey\logs\chocolatey.log
       fail >nul
     displayName: Debug

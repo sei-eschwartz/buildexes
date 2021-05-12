@@ -1,6 +1,6 @@
 variables:
-  CHOCLATEY_CACHE_DIR: $(Pipeline.Workspace)\choclatey_cache
-  CHOCLATEY_REPO: 'https://pkgs.dev.azure.com/edmcman/choco-vc/_packaging/choco-vc@Local/nuget/v2'
+  CHOCOLATEY_CACHE_DIR: $(Pipeline.Workspace)\chocolatey_cache
+  CHOCOLATEY_REPO: 'https://pkgs.dev.azure.com/edmcman/choco-vc/_packaging/choco-vc@Local/nuget/v2'
 
 jobs:
 - template: azure-pipelines/Build_Exes.yaml
