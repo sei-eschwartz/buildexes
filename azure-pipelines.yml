@@ -41,7 +41,7 @@ jobs:
     chocoPackages:
     - "msvisualstudio-2013express"
     displayName: "Visual C++ Express 2013"
-    cmakeGenName: "Visual Studio 11 2013"
+    cmakeGenName: "Visual Studio 12 2013"
 
 # - template: azure-pipelines/Build_Exes.yaml
 #   parameters:
