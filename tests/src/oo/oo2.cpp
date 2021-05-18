@@ -59,7 +59,7 @@ public:
   }
 };
 
-class Cls4 : Cls3 {
+class Cls4 : public Cls3 {
   DEFINE_PRINT_CONSTRUCTOR(Cls4);
   DEFINE_PRINT_DESTRUCTOR(Cls4);
   DEFINE_PRINT_OPERATOR_DELETE(Cls4);
