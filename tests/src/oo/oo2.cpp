@@ -41,7 +41,44 @@ public:
   }
 };
 
-class Cls3 : public Cls1, public Cls2 {
+class ClsBigVFTable {
+ public:
+  DEFINE_PRINT_CONSTRUCTOR(ClsBigVFTable);
+  DEFINE_PRINT_DESTRUCTOR(ClsBigVFTable);
+  DEFINE_PRINT_OPERATOR_DELETE(ClsBigVFTable);
+  virtual void vf1() {
+    std::cout << "I am vf1" << std::endl;
+  }
+  virtual void vf2() {
+    std::cout << "I am vf2" << std::endl;
+  }
+  virtual void vf3() {
+    std::cout << "I am vf3" << std::endl;
+  }
+  virtual void vf4() {
+    std::cout << "I am vf4" << std::endl;
+  }
+  virtual void vf5() {
+    std::cout << "I am vf5" << std::endl;
+  }
+  virtual void vf6() {
+    std::cout << "I am vf6" << std::endl;
+  }
+  virtual void vf7() {
+    std::cout << "I am vf7" << std::endl;
+  }
+  virtual void vf8() {
+    std::cout << "I am vf8" << std::endl;
+  }
+  virtual void vf9() {
+    std::cout << "I am vf9" << std::endl;
+  }
+  virtual void vf10() {
+    std::cout << "I am vf10" << std::endl;
+  }
+};
+
+class Cls3 : public Cls1, public Cls2, public ClsBigVFTable {
 
 public:
   int i;
