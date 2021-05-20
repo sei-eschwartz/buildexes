@@ -70,6 +70,7 @@ jobs:
         move Release "%variantDir%"
         move RelWithDebInfo "%variantDir%"
         move *.vcxproj "%variantDir%"
+        dir
       displayName: Build variant ${{ v.VARIANT }}
       env:
         variantDir: "$(PUBLISH_DIR)\\${{ parameters.name }}\\${{ v.VARIANT }}"
