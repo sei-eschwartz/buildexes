@@ -111,6 +111,7 @@ int main() {
   c1->func2();
 
   c4->func4();
+  c4->vf10();
 
   e->func1();
   e->func3();
