@@ -4,14 +4,18 @@ struct OtherBase {
     // OtherBase needs to have a vftable or Derived will include Base before OtherBase
     virtual void blah() {}
     int nonvirt () {
-        return 2;
+      y = 10;
+      return y;
     }
     int y;
 };
 
 struct Base {
+
+  int x = 42;
+
     virtual int foo() {
-        return 8;
+        return x;
     };
 };
 
