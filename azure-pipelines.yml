@@ -57,10 +57,10 @@ jobs:
 - template: azure-pipelines/Build_Exes.yaml
   parameters:
     name: "vs2017"
-    chocoPackages: []
+    chocoPackages:
+    - "visualstudio2017buildtools"
     displayName: "Visual C++ 2017"
     cmakeGenName: "Visual Studio 15 2017"
-    vmImage: "vs2017-win2016"
 
 - template: azure-pipelines/Build_Exes.yaml
   parameters:
