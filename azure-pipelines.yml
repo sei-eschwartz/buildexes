@@ -69,3 +69,13 @@ jobs:
     chocoPackages: []
     displayName: "Visual C++ 2019"
     cmakeGenName: "Visual Studio 16 2019"
+    vmImage: "windows-2019"
+
+- template: azure-pipelines/Build_Exes.yaml
+  parameters:
+    name: "vs2022"
+    # A hack because VS2019 is already installed on these machines
+    chocoPackages: []
+    displayName: "Visual C++ 2022"
+    cmakeGenName: "Visual Studio 17 2012"
+    vmImage: "windows-2022"
