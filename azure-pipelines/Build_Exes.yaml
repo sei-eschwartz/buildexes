@@ -3,6 +3,7 @@ parameters:
   chocoPackages: []
   displayName: ""
   cmakeGenName: ""
+  camekGenToolsetArg: ""
   vmImage: "windows-latest"
   # Default to 32-bit
   cmakeAlwaysFlags: "-A win32"
@@ -59,7 +60,7 @@ jobs:
         mkdir build-${{ v.VARIANT }}
         cd build-${{ v.VARIANT }}
         echo "##vso[task.prependpath]%ProgramFiles%\\cmake\\bin"
-        cmake.exe -E env CXXFLAGS="${{ v.CXXFLAGS }}" LDFLAGS="${{ v.LDFLAGS }}" cmake.exe ${{ parameters.cmakeAlwaysFlags }} ${{ v.CMAKEFLAGS }} -G "${{ parameters.cmakeGenName }}" ..
+        cmake.exe -E env CXXFLAGS="${{ v.CXXFLAGS }}" LDFLAGS="${{ v.LDFLAGS }}" cmake.exe ${{ parameters.cmakeAlwaysFlags }} ${{ v.CMAKEFLAGS }} -G "${{ parameters.cmakeGenName }}" "${{ parameters.cmakeGenToolsetArg }}" ..
         cmake.exe --build . --verbose --config Debug
         cmake.exe --build . --verbose --config Lite || VER>NUL
         cmake.exe --build . --verbose --config Release

@@ -11,13 +11,16 @@ jobs:
     displayName: "Visual C++ Express 2008"
     cmakeGenName: "Visual Studio 9 2008"
 
+
+# https://cmake.org/cmake/help/latest/generator/Visual%20Studio%2010%202010.html
 - template: azure-pipelines/Build_Exes.yaml
   parameters:
     name: "vs2010"
     chocoPackages:
     - "msvisualcpp-2010express"
     displayName: "Visual C++ Express 2010"
-    cmakeGenName: "Visual Studio 10 2010"
+    cmakeGenName: "Visual Studio 12 2013"
+    cmakeGenToolsetArg: "-T v100"
 
 # - template: azure-pipelines/Build_Exes.yaml
 #   parameters:
