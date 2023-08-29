@@ -58,7 +58,7 @@ jobs:
   parameters:
     name: "vs2017"
     chocoPackages:
-    - "visualstudio2017community"
+    - "visualstudio2017enterprise"
     displayName: "Visual C++ 2017"
     cmakeGenName: "Visual Studio 15 2017"
 
