@@ -52,7 +52,7 @@ jobs:
     name: "vs2015"
     chocoPackages:
 #    - "msvisualstudio-2015community"
-    - "microsoft-visual-cpp-build-tools"
+    - "vcbuildtools"
     displayName: "Visual C++ 2015"
     cmakeGenName: "Visual Studio 14 2015"
 
