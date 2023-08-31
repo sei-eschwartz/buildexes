@@ -5,6 +5,7 @@ parameters:
   cmakeGenName: ""
   camekGenToolsetArg: ""
   vmImage: "windows-latest"
+  extraPath: ""
   # Default to 32-bit
   cmakeAlwaysFlags: "-A win32"
   variants:
@@ -53,6 +54,10 @@ jobs:
       fail >nul
     displayName: Debug
     condition: failed()
+  - script: |
+      echo ##vso[task.prependpath]${{ parameters.extraPath }}
+    displayName: Add extra path
+    condition: and(succeeded(), ne('${{ parameters.extraPath}}', ''))
   - ${{ each v in parameters.variants }}:
     - script: |
         @echo on
