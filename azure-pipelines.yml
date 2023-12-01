@@ -13,7 +13,7 @@ parameters:
         - "msvisualcpp-2010express"
       displayName: "Visual C++ Express 2010"
       cmakeGenName: "Visual Studio 12 2013"
-      # cmakeGenToolsetArg: "-T v100"
+      cmakeGenToolsetArg: "-T v100"
       extraPath: "%SystemRoot%\\Microsoft.NET\\Framework\\v4.0.30319"
 
     - name: "vs2012"
