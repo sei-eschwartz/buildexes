@@ -1,83 +1,37 @@
+parameters:
+- name: vsVersionList
+  type: object
+  default:
+    - name: "vs2008"
+      chocoPackages:
+        - "msvisualcpp-2008sp1express"
+      displayName: "Visual C++ Express 2008"
+      cmakeGenName: "Visual Studio 9 2008"
+- name: archList
+  type: object
+  default:
+    - 'WIN32'
+    - 'X64'
+
 variables:
   CHOCOLATEY_CACHE_DIR: $(Pipeline.Workspace)\chocolatey_cache
   CHOCOLATEY_REPO: 'https://pkgs.dev.azure.com/edmcman/choco-vc/_packaging/choco-vc@Local/nuget/v2'
 
 jobs:
-- template: azure-pipelines/Build_Exes.yaml
-  parameters:
-    name: "vs2008"
-    chocoPackages:
-    - "msvisualcpp-2008sp1express"
-    displayName: "Visual C++ Express 2008"
-    cmakeGenName: "Visual Studio 9 2008"
-
-
-# https://cmake.org/cmake/help/latest/generator/Visual%20Studio%2010%202010.html
-- template: azure-pipelines/Build_Exes.yaml
-  parameters:
-    name: "vs2010"
-    chocoPackages:
-    - "msvisualcpp-2010express"
-    displayName: "Visual C++ Express 2010"
-    cmakeGenName: "Visual Studio 12 2013"
-    cmakeGenToolsetArg: "-T v100"
-    extraPath: "%SystemRoot%\\Microsoft.NET\\Framework\\v4.0.30319"
-
-# - template: azure-pipelines/Build_Exes.yaml
-#   parameters:
-#     name: "vs2012p"
-#     chocoPackages:
-#     - "msvisualstudio-2012professional"
-#     displayName: "Visual C++ Professional 2012"
-#     cmakeGenName: "Visual Studio 11 2012"
-
-- template: azure-pipelines/Build_Exes.yaml
-  parameters:
-    name: "vs2012"
-    chocoPackages:
-    - "msvisualstudio-2012express"
-    displayName: "Visual C++ Express 2012"
-    cmakeGenName: "Visual Studio 11 2012"
-
-- template: azure-pipelines/Build_Exes.yaml
-  parameters:
-    name: "vs2013"
-    chocoPackages:
-    - "msvisualstudio-2013express"
-    displayName: "Visual C++ Express 2013"
-    cmakeGenName: "Visual Studio 12 2013"
-
-- template: azure-pipelines/Build_Exes.yaml
-  parameters:
-    name: "vs2015"
-    chocoPackages:
-    - "msvisualstudio-2015community"
-    displayName: "Visual C++ 2015"
-    cmakeGenName: "Visual Studio 14 2015"
-
-- template: azure-pipelines/Build_Exes.yaml
-  parameters:
-    name: "vs2017"
-    chocoPackages:
-    - "visualstudio2017buildtools"
-    - "visualstudio2017-workload-vctools"
-    displayName: "Visual C++ 2017"
-    cmakeGenName: "Visual Studio 15 2017"
-
-- template: azure-pipelines/Build_Exes.yaml
-  parameters:
-    name: "vs2019"
-    # A hack because VS2019 is already installed on these machines
-    chocoPackages: []
-    displayName: "Visual C++ 2019"
-    cmakeGenName: "Visual Studio 16 2019"
-    vmImage: "windows-2019"
-
-- template: azure-pipelines/Build_Exes.yaml
-  parameters:
-    name: "vs2022"
-    # A hack because VS2019 is already installed on these machines
-    chocoPackages: []
-    displayName: "Visual C++ 2022"
-    cmakeGenName: "Visual Studio 17 2022"
-    vmImage: "windows-2022"
+  - ${{ each vsVersion in parameters.vsVersionList }}:
+    - ${{ each arch in parameters.archList }}:
+      - job: ${{ vsVersion }}_${{ arch }}
+        variables:
+          vsVersion: ${{ vsVersion }}
+          arch: ${{ arch }}
+          # Additional version-specific variables can be set here based on vsVersion
+        steps:
+        - template: azure-pipelines/Build_Exes.yaml
+          parameters:
+            name: ${{ vsVersion }}_${{ arch }}
+            arch: ${{ arch }}
+            chocoPackages: ${{ vsVersion.chocoPackages }}
+            displayName: ${{ vsVersion.displayName }}
+            cmakeGenName: ${{ vsVersion.cmakeGenName }}
+            cmakeGenToolsetArg: ${{ vsVersion.cmakeGenToolsetArg }}
+            extraPath: ${{ vsVersion.extraPath }}
