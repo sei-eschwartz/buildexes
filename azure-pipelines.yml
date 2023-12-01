@@ -58,8 +58,11 @@ parameters:
 - name: archList
   type: object
   default:
-    - 'win32'
-    - 'x64'
+    - name: 'x86'
+      cmakeArch: 'win32'
+
+    - name: 'x86-64'
+      cmakeArch: 'x64'
 
 variables:
   CHOCOLATEY_CACHE_DIR: $(Pipeline.Workspace)\chocolatey_cache
@@ -70,11 +73,11 @@ jobs:
   - ${{ each arch in parameters.archList }}:
     - template: azure-pipelines/Build_Exes.yaml
       parameters:
-        name: ${{ vsVersion.name }}_${{ arch }}
-        arch: ${{ arch }}
+        name: ${{ vsVersion.name }}_${{ arch.name }}
+        arch: ${{ arch.name }}
         chocoPackages: ${{ vsVersion.chocoPackages }}
-        displayName: ${{ vsVersion.displayName }} ${{ arch }}
-        cmakeAlwaysFlags: -A ${{ arch }}
+        displayName: ${{ vsVersion.displayName }} ${{ arch.name }}
+        cmakeAlwaysFlags: -A ${{ arch.cmakeArch }}
         cmakeGenName: ${{ vsVersion.cmakeGenName }}
         cmakeGenToolsetArg: ${{ vsVersion.cmakeGenToolsetArg }}
         extraPath: ${{ vsVersion.extraPath }}
