@@ -18,14 +18,13 @@ variables:
   CHOCOLATEY_REPO: 'https://pkgs.dev.azure.com/edmcman/choco-vc/_packaging/choco-vc@Local/nuget/v2'
 
 jobs:
-  - ${{ each vsVersion in parameters.vsVersionList }}:
-    - ${{ each arch in parameters.archList }}:
-      - job: ${{ vsVersion.name }}_${{ arch }}
-        variables:
-          vsVersion: ${{ vsVersion }}
-          arch: ${{ arch }}
-          # Additional version-specific variables can be set here based on vsVersion
-        steps:
+- ${{ each vsVersion in parameters.vsVersionList }}:
+  - ${{ each arch in parameters.archList }}:
+    - job: ${{ vsVersion.name }}_${{ arch }}
+      variables:
+        vsVersion: ${{ vsVersion }}
+        arch: ${{ arch }}
+      steps:
         - template: azure-pipelines/Build_Exes.yaml
           parameters:
             name: ${{ vsVersion }}_${{ arch }}
