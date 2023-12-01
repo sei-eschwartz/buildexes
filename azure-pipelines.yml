@@ -22,7 +22,7 @@ jobs:
   - ${{ each arch in parameters.archList }}:
     - template: azure-pipelines/Build_Exes.yaml
       parameters:
-        name: ${{ vsVersion }}_${{ arch }}
+        name: ${{ vsVersion.name }}_${{ arch }}
         arch: ${{ arch }}
         chocoPackages: ${{ vsVersion.chocoPackages }}
         displayName: ${{ vsVersion.displayName }} ${{ arch }}
