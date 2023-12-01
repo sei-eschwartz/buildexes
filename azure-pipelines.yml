@@ -20,7 +20,7 @@ variables:
 jobs:
   - ${{ each vsVersion in parameters.vsVersionList }}:
     - ${{ each arch in parameters.archList }}:
-      - job: ${{ vsVersion }}_${{ arch }}
+      - job: ${{ vsVersion.name }}_${{ arch }}
         variables:
           vsVersion: ${{ vsVersion }}
           arch: ${{ arch }}
