@@ -20,17 +20,12 @@ variables:
 jobs:
 - ${{ each vsVersion in parameters.vsVersionList }}:
   - ${{ each arch in parameters.archList }}:
-    - job: ${{ vsVersion.name }}_${{ arch }}
-      variables:
-        vsVersion: ${{ vsVersion }}
+    - template: azure-pipelines/Build_Exes.yaml
+      parameters:
+        name: ${{ vsVersion }}_${{ arch }}
         arch: ${{ arch }}
-      steps:
-        - template: azure-pipelines/Build_Exes.yaml
-          parameters:
-            name: ${{ vsVersion }}_${{ arch }}
-            arch: ${{ arch }}
-            chocoPackages: ${{ vsVersion.chocoPackages }}
-            displayName: ${{ vsVersion.displayName }}
-            cmakeGenName: ${{ vsVersion.cmakeGenName }}
-            cmakeGenToolsetArg: ${{ vsVersion.cmakeGenToolsetArg }}
-            extraPath: ${{ vsVersion.extraPath }}
+        chocoPackages: ${{ vsVersion.chocoPackages }}
+        displayName: ${{ vsVersion.displayName }} ${{ arch }}
+        cmakeGenName: ${{ vsVersion.cmakeGenName }}
+        cmakeGenToolsetArg: ${{ vsVersion.cmakeGenToolsetArg }}
+        extraPath: ${{ vsVersion.extraPath }}
