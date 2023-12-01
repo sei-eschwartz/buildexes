@@ -59,9 +59,11 @@ parameters:
   type: object
   default:
     - name: 'x86'
+      displayName: 'x86'
       cmakeArch: 'win32'
 
-    - name: 'x86-64'
+    - name: 'x86_64'
+      displayName: 'x86-64'
       cmakeArch: 'x64'
 
 variables:
@@ -74,9 +76,9 @@ jobs:
     - template: azure-pipelines/Build_Exes.yaml
       parameters:
         name: ${{ vsVersion.name }}_${{ arch.name }}
-        arch: ${{ arch.name }}
+        #arch: ${{ arch.name }}
         chocoPackages: ${{ vsVersion.chocoPackages }}
-        displayName: ${{ vsVersion.displayName }} ${{ arch.name }}
+        displayName: ${{ vsVersion.displayName }} ${{ arch.displayName }}
         cmakeAlwaysFlags: -A ${{ arch.cmakeArch }}
         cmakeGenName: ${{ vsVersion.cmakeGenName }}
         cmakeGenToolsetArg: ${{ vsVersion.cmakeGenToolsetArg }}
