@@ -73,32 +73,26 @@ variables:
   CHOCOLATEY_CACHE_DIR: $(Pipeline.Workspace)\chocolatey_cache
   CHOCOLATEY_REPO: 'https://pkgs.dev.azure.com/edmcman/choco-vc/_packaging/choco-vc@Local/nuget/v2'
 
-stages:
-- stage: Build
-  displayName: Build Stage
-  jobs:
+jobs:
+- ${{ each vsVersion in parameters.vsVersionList }}:
+  - ${{ each arch in parameters.archList }}:
+    - ${{ if not(and(eq(vsVersion.has64, false), eq(arch.name, 'x86_64'))) }}:
+      - template: azure-pipelines/Build_Exes.yaml
+        parameters:
+          name: ${{ vsVersion.name }}_${{ arch.name }}
+          #arch: ${{ arch.name }}
+          chocoPackages: ${{ vsVersion.chocoPackages }}
+          displayName: ${{ vsVersion.displayName }} ${{ arch.displayName }}
+          cmakeAlwaysFlags: -A ${{ arch.cmakeArch }}
+          cmakeGenName: ${{ vsVersion.cmakeGenName }}
+          cmakeGenToolsetArg: ${{ vsVersion.cmakeGenToolsetArg }}
+          extraPath: ${{ vsVersion.extraPath }}
+
+- job: CombineArtifacts
+  dependsOn: # Build_Exes_${{parameters.name}}
   - ${{ each vsVersion in parameters.vsVersionList }}:
     - ${{ each arch in parameters.archList }}:
       - ${{ if not(and(eq(vsVersion.has64, false), eq(arch.name, 'x86_64'))) }}:
-        - template: azure-pipelines/Build_Exes.yaml
-          parameters:
-            name: ${{ vsVersion.name }}_${{ arch.name }}
-            #arch: ${{ arch.name }}
-            chocoPackages: ${{ vsVersion.chocoPackages }}
-            displayName: ${{ vsVersion.displayName }} ${{ arch.displayName }}
-            cmakeAlwaysFlags: -A ${{ arch.cmakeArch }}
-            cmakeGenName: ${{ vsVersion.cmakeGenName }}
-            cmakeGenToolsetArg: ${{ vsVersion.cmakeGenToolsetArg }}
-            extraPath: ${{ vsVersion.extraPath }}
-
-- stage: Combine
-  displayName: Combine Artifacts
-  jobs:
-  - job: CombineArtifacts
-    dependsOn: # Build_Exes_${{parameters.name}}
-    - ${{ each vsVersion in parameters.vsVersionList }}:
-      - ${{ each arch in parameters.archList }}:
-        - ${{ if not(and(eq(vsVersion.has64, false), eq(arch.name, 'x86_64'))) }}:
-          - Build_Exes_${{ vsVersion.name }}_${{ arch.name }}
-    steps:
-    - script: echo yay
+        - Build_Exes_${{ vsVersion.name }}_${{ arch.name }}
+  steps:
+  - script: echo yay
