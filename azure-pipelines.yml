@@ -7,6 +7,7 @@ parameters:
         - "msvisualcpp-2008sp1express"
       displayName: "Visual C++ Express 2008"
       cmakeGenName: "Visual Studio 9 2008"
+      has64: false
 
     - name: "vs2010"
       chocoPackages:
@@ -15,6 +16,7 @@ parameters:
       cmakeGenName: "Visual Studio 12 2013"
       cmakeGenToolsetArg: "-T v100"
       extraPath: "%SystemRoot%\\Microsoft.NET\\Framework\\v4.0.30319"
+      has64: false
 
     - name: "vs2012"
       chocoPackages:
@@ -41,12 +43,13 @@ parameters:
       displayName: "Visual C++ 2017"
       cmakeGenName: "Visual Studio 15 2017"
 
-    - name: "vs2019"
-      # A hack because VS2019 is already installed on these machines
-      chocoPackages: []
-      displayName: "Visual C++ 2019"
-      cmakeGenName: "Visual Studio 16 2019"
-      vmImage: "windows-2019"
+    # vs 2019 isn't working right now for unknown reasons
+    #- name: "vs2019"
+    #  # A hack because VS2019 is already installed on these machines
+    #  chocoPackages: []
+    #  displayName: "Visual C++ 2019"
+    #  cmakeGenName: "Visual Studio 16 2019"
+    #  vmImage: "windows-2019"
 
     - name: "vs2022"
       # A hack because VS2019 is already installed on these machines
@@ -73,13 +76,14 @@ variables:
 jobs:
 - ${{ each vsVersion in parameters.vsVersionList }}:
   - ${{ each arch in parameters.archList }}:
-    - template: azure-pipelines/Build_Exes.yaml
-      parameters:
-        name: ${{ vsVersion.name }}_${{ arch.name }}
-        #arch: ${{ arch.name }}
-        chocoPackages: ${{ vsVersion.chocoPackages }}
-        displayName: ${{ vsVersion.displayName }} ${{ arch.displayName }}
-        cmakeAlwaysFlags: -A ${{ arch.cmakeArch }}
-        cmakeGenName: ${{ vsVersion.cmakeGenName }}
-        cmakeGenToolsetArg: ${{ vsVersion.cmakeGenToolsetArg }}
-        extraPath: ${{ vsVersion.extraPath }}
+    - ${{ if not(and(eq(parameters.has64, false), eq(arch.name, 'x86_64'))) }}:
+      - template: azure-pipelines/Build_Exes.yaml
+        parameters:
+          name: ${{ vsVersion.name }}_${{ arch.name }}
+          #arch: ${{ arch.name }}
+          chocoPackages: ${{ vsVersion.chocoPackages }}
+          displayName: ${{ vsVersion.displayName }} ${{ arch.displayName }}
+          cmakeAlwaysFlags: -A ${{ arch.cmakeArch }}
+          cmakeGenName: ${{ vsVersion.cmakeGenName }}
+          cmakeGenToolsetArg: ${{ vsVersion.cmakeGenToolsetArg }}
+          extraPath: ${{ vsVersion.extraPath }}
