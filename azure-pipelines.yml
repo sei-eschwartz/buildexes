@@ -76,7 +76,7 @@ variables:
 jobs:
 - ${{ each vsVersion in parameters.vsVersionList }}:
   - ${{ each arch in parameters.archList }}:
-    - ${{ if not(and(eq(parameters.has64, false), eq(arch.name, 'x86_64'))) }}:
+    - ${{ if not(and(eq(vsVersion.has64, false), eq(arch.name, 'x86_64'))) }}:
       - template: azure-pipelines/Build_Exes.yaml
         parameters:
           name: ${{ vsVersion.name }}_${{ arch.name }}
