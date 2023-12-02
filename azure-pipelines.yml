@@ -87,3 +87,12 @@ jobs:
           cmakeGenName: ${{ vsVersion.cmakeGenName }}
           cmakeGenToolsetArg: ${{ vsVersion.cmakeGenToolsetArg }}
           extraPath: ${{ vsVersion.extraPath }}
+
+- job: CombineArtifacts
+  dependsOn: # Build_Exes_${{parameters.name}}
+  - ${{ each vsVersion in parameters.vsVersionList }}:
+    - ${{ each arch in parameters.archList }}:
+      - ${{ if not(and(eq(vsVersion.has64, false), eq(arch.name, 'x86_64'))) }}:
+        - Build_Exes_${{ vsVersion.name }}_${{ arch.name }}
+  steps:
+  - script: echo yay
