@@ -97,10 +97,10 @@ jobs:
         - ${{ if not(and(eq(vsVersion.has64, false), eq(arch.name, 'x86_64'))) }}:
           - Build_Exes_${{ vsVersion.name }}_${{ arch.name }}
   steps:
-  - task: DownloadPipelineArtifacts@0
+  - task: DownloadPipelineArtifact@2
     inputs:
       buildType: 'current'
-      downloadPath: '$(System.ArtifactsDirectory)'
+      dtargetPath: '$(System.ArtifactsDirectory)'
   - task: PublishPipelineArtifact@1
     inputs:
       PathToPublish: '$(System.ArtifactsDirectory)'
