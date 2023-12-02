@@ -89,6 +89,8 @@ jobs:
           extraPath: ${{ vsVersion.extraPath }}
 
 - job: CombineArtifacts
+  pool:
+    vmImage: windows-latest
   dependsOn: # Build_Exes_${{parameters.name}}
   - ${{ each vsVersion in parameters.vsVersionList }}:
     - ${{ each arch in parameters.archList }}:
