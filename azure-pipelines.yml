@@ -92,9 +92,16 @@ jobs:
   pool:
     vmImage: windows-latest
   dependsOn: # Build_Exes_${{parameters.name}}
-  - ${{ each vsVersion in parameters.vsVersionList }}:
-    - ${{ each arch in parameters.archList }}:
-      - ${{ if not(and(eq(vsVersion.has64, false), eq(arch.name, 'x86_64'))) }}:
-        - Build_Exes_${{ vsVersion.name }}_${{ arch.name }}
+    - ${{ each vsVersion in parameters.vsVersionList }}:
+      - ${{ each arch in parameters.archList }}:
+        - ${{ if not(and(eq(vsVersion.has64, false), eq(arch.name, 'x86_64'))) }}:
+          - Build_Exes_${{ vsVersion.name }}_${{ arch.name }}
   steps:
-  - script: echo yay
+  - task: DownloadPipelineArtifacts@0
+    inputs:
+      buildType: 'current'
+      downloadPath: '$(System.ArtifactsDirectory)'
+  - task: PublishPipelineArtifact@1
+    inputs:
+      PathToPublish: '$(System.ArtifactsDirectory)'
+      artifactName: AllArtifacts
