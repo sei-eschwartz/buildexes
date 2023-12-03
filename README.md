@@ -1,5 +1,7 @@
 # buildexes
 
+[![Build Status](https://dev.azure.com/seipharos/buildexes/_apis/build/status%2Fsei-eschwartz.buildexes?branchName=master)](https://dev.azure.com/seipharos/buildexes/_build/latest?definitionId=3&branchName=master)
+
 This repository builds exes using several versions of the Microsoft Visual C++ compiler.
 
 Note: Uses some packages from [choco-vc](https://github.com/edmcman/choco-vc)
