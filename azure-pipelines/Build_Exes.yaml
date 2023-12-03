@@ -1,12 +1,12 @@
 parameters:
   name: ""
+  arch: ""
   chocoPackages: []
   displayName: ""
   cmakeGenName: ""
-  camekGenToolsetArg: ""
+  cmakeGenToolsetArg: ""
   vmImage: "windows-latest"
   extraPath: ""
-  # Default to 32-bit
   cmakeAlwaysFlags: "-A win32"
   variants:
     - CXXFLAGS: ""

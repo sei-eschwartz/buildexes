@@ -3,3 +3,24 @@
 This repository builds exes using several versions of the Microsoft Visual C++ compiler.
 
 Note: Uses some packages from [choco-vc](https://github.com/edmcman/choco-vc)
+
+# Features
+
+VS versions:
+- 2008 (express) (no x86-64)
+- 2010 (express) (no x86-64)
+- 2012 (express)
+- 2013 (express)
+- 2015
+- 2017
+- <strike>2019</strike> (not working)
+- 2022
+
+Architectures:
+- x86
+- x86-64
+
+# Bugs
+
+- 2008 and 2010 should support x86-64 but don't work for some reason
+- 2019 mysteriously stopped working for some reason
