@@ -65,7 +65,8 @@ jobs:
         mkdir build-${{ v.VARIANT }}
         cd build-${{ v.VARIANT }}
         echo ##vso[task.prependpath]%ProgramFiles%\\cmake\\bin
-        cmake.exe -E env CXXFLAGS="${{ v.CXXFLAGS }}" LDFLAGS="${{ v.LDFLAGS }}" cmake.exe --debug-output ${{ parameters.cmakeAlwaysFlags }} ${{ v.CMAKEFLAGS }} -G "${{ parameters.cmakeGenName }}" ${{ parameters.cmakeGenToolsetArg }} ..
+        cmake.exe --system-information
+        cmake.exe -E env CXXFLAGS="${{ v.CXXFLAGS }}" LDFLAGS="${{ v.LDFLAGS }}" cmake.exe --debug-output --trace ${{ parameters.cmakeAlwaysFlags }} ${{ v.CMAKEFLAGS }} -G "${{ parameters.cmakeGenName }}" ${{ parameters.cmakeGenToolsetArg }} ..
         cmake.exe --build . --verbose --config Debug
         cmake.exe --build . --verbose --config Lite || VER>NUL
         cmake.exe --build . --verbose --config Release
