@@ -12,7 +12,7 @@ parameters:
       cmakeGenName: "Visual Studio 14 2015"
       cmakeGenToolsetArg: "-T v90"
       extraPath: "%SystemRoot%\\Microsoft.NET\\Framework\\v4.0.30319"
-      has64: false
+      #has64: false
 
     - name: "vs2010"
       chocoPackages:
@@ -23,7 +23,7 @@ parameters:
       cmakeGenName: "Visual Studio 14 2015"
       cmakeGenToolsetArg: "-T v100"
       extraPath: "%SystemRoot%\\Microsoft.NET\\Framework\\v4.0.30319"
-      has64: false
+      #has64: false
 
     - name: "vs2012"
       chocoPackages:
