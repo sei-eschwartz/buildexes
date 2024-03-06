@@ -42,7 +42,7 @@ parameters:
       displayName: "Visual C++ Express 2013"
       # https://cmake.org/cmake/help/latest/generator/Visual%20Studio%2012%202013.html
       # Note This generator is deprecated and will be removed in a future version of CMake. It will still be possible to build with VS 12 2013 tools using the Visual Studio 14 2015 (or above) generator with CMAKE_GENERATOR_TOOLSET set to v120, or by using the NMake Makefiles generator.
-      cmakeGenName: "Visual Studio 14 2015"
+      cmakeGenName: "Visual Studio 17 2022"
       cmakeGenToolsetArg: "-T v120"
       extraPath: "%SystemRoot%\\Microsoft.NET\\Framework\\v4.0.30319"
 
