@@ -58,7 +58,9 @@ jobs:
       echo ##vso[task.prependpath]${{ parameters.extraPath }}
     displayName: Add extra path
     condition: and(succeeded(), ne('${{ parameters.extraPath}}', ''))
-  - powershell: Get-ChildItem -Path C:\\ -Filter MSBuild.exe -Recurse -ErrorAction SilentlyContinue -Force
+  - powershell: |
+      Get-ChildItem -Path C:\\ -Filter MSBuild.exe -Recurse -ErrorAction SilentlyContinue -Force
+      Get-ChildItem -Path D:\\ -Filter MSBuild.exe -Recurse -ErrorAction SilentlyContinue -Force
   - ${{ each v in parameters.variants }}:
     - script: |
         @echo on
