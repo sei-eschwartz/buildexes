@@ -102,8 +102,11 @@ jobs:
           displayName: ${{ vsVersion.displayName }} ${{ arch.displayName }}
           cmakeAlwaysFlags: -A ${{ arch.cmakeArch }}
           cmakeGenName: ${{ vsVersion.cmakeGenName }}
-          cmakeGenToolsetArg: ${{ vsVersion.cmakeGenToolsetArg }}
-          extraPath: ${{ vsVersion.extraPath }}
+          ${{ if ne(vsVersion.cmakeGenToolsetArg, '') }}:
+            cmakeGenToolsetArg: ${{ vsVersion.cmakeGenName }},arch=${{ arch.cmakeArch }}
+          ${{ if eq(vsVersion.cmakeGenToolsetArg, '') }}:
+            cmakeGenToolsetArg:
+          extraPath: ${{ vsVersion.extraPath }}               
 
 - job: CombineArtifacts
   pool:
