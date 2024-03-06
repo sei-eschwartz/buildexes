@@ -4,7 +4,7 @@ parameters:
   default:
 
 
-    - name: "vs2012-2022gen"
+    - name: "vs2012_2022gen"
       chocoPackages:
         - "msvisualstudio-2012express"
       displayName: "Visual C++ Express 2012"
@@ -16,7 +16,7 @@ parameters:
       cmakeGenToolsetArg: "-T v110"
       extraPath: "%SystemRoot%\\Microsoft.NET\\Framework\\v4.0.30319"
 
-    - name: "vs2012-2013gen"
+    - name: "vs2012_2013gen"
       chocoPackages:
         - "msvisualstudio-2012express"
         - "msvisualstudio-2013express" # just so the 2013 generator works...
