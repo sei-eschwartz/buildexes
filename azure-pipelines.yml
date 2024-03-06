@@ -103,7 +103,7 @@ jobs:
           cmakeAlwaysFlags: -A ${{ arch.cmakeArch }}
           cmakeGenName: ${{ vsVersion.cmakeGenName }}
           ${{ if ne(vsVersion.cmakeGenToolsetArg, '') }}:
-            cmakeGenToolsetArg: ${{ vsVersion.cmakeGenName }},arch=${{ arch.cmakeArch }}
+            cmakeGenToolsetArg: ${{ vsVersion.cmakeGenToolsetArg }},arch=${{ arch.cmakeArch }}
           ${{ if eq(vsVersion.cmakeGenToolsetArg, '') }}:
             cmakeGenToolsetArg:
           extraPath: ${{ vsVersion.extraPath }}               
