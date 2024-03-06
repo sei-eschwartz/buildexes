@@ -22,7 +22,10 @@ parameters:
       chocoPackages:
         - "msvisualstudio-2012express"
       displayName: "Visual C++ Express 2012"
-      cmakeGenName: "Visual Studio 11 2012"
+      # https://cmake.org/cmake/help/latest/generator/Visual%20Studio%2011%202012.html
+      # Removed. This once generated Visual Studio 11 2012 project files, but the generator has been removed since CMake 3.28. It is still possible to build with VS 11 2012 tools using the Visual Studio 14 2015 (or above) generator with CMAKE_GENERATOR_TOOLSET set to v110, or by using the NMake Makefiles generator.
+      cmakeGenName: "Visual Studio 14 2015"
+      cmakeGenToolsetArg: "-T v110"
 
     - name: "vs2013"
       chocoPackages:
