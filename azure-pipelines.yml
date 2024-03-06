@@ -6,6 +6,8 @@ parameters:
       chocoPackages:
         - "msvisualcpp-2008sp1express"
       displayName: "Visual C++ Express 2008"
+      # https://cmake.org/cmake/help/latest/generator/Visual%20Studio%209%202008.html
+      # Note This generator is deprecated and will be removed in a future version of CMake. It will still be possible to build with VS 9 2008 tools using the Visual Studio 14 2015 generator (or above, and with VS 10 2010 also installed) with CMAKE_GENERATOR_TOOLSET set to v90, or by using the NMake Makefiles generator.
       cmakeGenName: "Visual Studio 9 2008"
       has64: false
 
