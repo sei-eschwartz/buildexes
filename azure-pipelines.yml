@@ -81,10 +81,12 @@ parameters:
     - name: 'x86'
       displayName: 'x86'
       cmakeArch: 'win32'
+      toolsetArch: 'x86'
 
     - name: 'x86_64'
       displayName: 'x86-64'
       cmakeArch: 'x64'
+      toolsetArch: 'x64'
 
 variables:
   CHOCOLATEY_CACHE_DIR: $(Pipeline.Workspace)\chocolatey_cache
@@ -103,7 +105,7 @@ jobs:
           cmakeAlwaysFlags: -A ${{ arch.cmakeArch }}
           cmakeGenName: ${{ vsVersion.cmakeGenName }}
           ${{ if ne(vsVersion.cmakeGenToolsetArg, '') }}:
-            cmakeGenToolsetArg: ${{ vsVersion.cmakeGenToolsetArg }},arch=${{ arch.cmakeArch }}
+            cmakeGenToolsetArg: ${{ vsVersion.cmakeGenToolsetArg }},arch=${{ arch.toolsetArch }}
           ${{ if eq(vsVersion.cmakeGenToolsetArg, '') }}:
             cmakeGenToolsetArg:
           extraPath: ${{ vsVersion.extraPath }}               
