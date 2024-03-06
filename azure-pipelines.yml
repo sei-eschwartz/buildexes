@@ -2,28 +2,7 @@ parameters:
 - name: vsVersionList
   type: object
   default:
-    - name: "vs2008"
-      chocoPackages:
-        - "msvisualcpp-2008sp1express"
-        - "msvisualcpp-2010express"
-      displayName: "Visual C++ Express 2008"
-      # https://cmake.org/cmake/help/latest/generator/Visual%20Studio%209%202008.html
-      # Note This generator is deprecated and will be removed in a future version of CMake. It will still be possible to build with VS 9 2008 tools using the Visual Studio 14 2015 generator (or above, and with VS 10 2010 also installed) with CMAKE_GENERATOR_TOOLSET set to v90, or by using the NMake Makefiles generator.
-      cmakeGenName: "Visual Studio 14 2015"
-      cmakeGenToolsetArg: "-T v90"
-      extraPath: "%SystemRoot%\\Microsoft.NET\\Framework\\v4.0.30319"
-      has64: false
 
-    - name: "vs2010"
-      chocoPackages:
-        - "msvisualcpp-2010express"
-      displayName: "Visual C++ Express 2010"
-      # https://cmake.org/cmake/help/latest/generator/Visual%20Studio%2010%202010.html
-      # Removed. This once generated Visual Studio 10 2010 project files, but the generator has been removed since CMake 3.25. It is still possible to build with VS 10 2010 tools using the Visual Studio 14 2015 (or above) generator with CMAKE_GENERATOR_TOOLSET set to v100, or by using the NMake Makefiles generator.
-      cmakeGenName: "Visual Studio 14 2015"
-      cmakeGenToolsetArg: "-T v100"
-      extraPath: "%SystemRoot%\\Microsoft.NET\\Framework\\v4.0.30319"
-      has64: false
 
     - name: "vs2012"
       chocoPackages:
@@ -33,50 +12,10 @@ parameters:
       # https://cmake.org/cmake/help/latest/generator/Visual%20Studio%2011%202012.html
       # Removed. This once generated Visual Studio 11 2012 project files, but the generator has been removed since CMake 3.28. It is still possible to build with VS 11 2012 tools using the Visual Studio 14 2015 (or above) generator with CMAKE_GENERATOR_TOOLSET set to v110, or by using the NMake Makefiles generator.
       # why doesn't the vs2022 generator work?
-      # cmakeGenName: "Visual Studio 17 2022"
-      cmakeGenName: "Visual Studio 12 2013"
+      cmakeGenName: "Visual Studio 17 2022"
+      # cmakeGenName: "Visual Studio 12 2013"
       cmakeGenToolsetArg: "-T v110"
       extraPath: "%SystemRoot%\\Microsoft.NET\\Framework\\v4.0.30319"
-
-
-    - name: "vs2013"
-      chocoPackages:
-        - "msvisualstudio-2013express"
-      displayName: "Visual C++ Express 2013"
-      # https://cmake.org/cmake/help/latest/generator/Visual%20Studio%2012%202013.html
-      # Note This generator is deprecated and will be removed in a future version of CMake. It will still be possible to build with VS 12 2013 tools using the Visual Studio 14 2015 (or above) generator with CMAKE_GENERATOR_TOOLSET set to v120, or by using the NMake Makefiles generator.
-      cmakeGenName: "Visual Studio 17 2022"
-      cmakeGenToolsetArg: "-T v120"
-      extraPath: "%SystemRoot%\\Microsoft.NET\\Framework\\v4.0.30319"
-
-
-    - name: "vs2015"
-      chocoPackages:
-        - "msvisualstudio-2015community"
-      displayName: "Visual C++ 2015"
-      cmakeGenName: "Visual Studio 14 2015"
-
-    - name: "vs2017"
-      chocoPackages:
-        - "visualstudio2017buildtools"
-        - "visualstudio2017-workload-vctools"
-      displayName: "Visual C++ 2017"
-      cmakeGenName: "Visual Studio 15 2017"
-
-    # vs 2019 isn't working right now for unknown reasons
-    #- name: "vs2019"
-    #  # A hack because VS2019 is already installed on these machines
-    #  chocoPackages: []
-    #  displayName: "Visual C++ 2019"
-    #  cmakeGenName: "Visual Studio 16 2019"
-    #  vmImage: "windows-2019"
-
-    - name: "vs2022"
-      # A hack because VS2019 is already installed on these machines
-      chocoPackages: []
-      displayName: "Visual C++ 2022"
-      cmakeGenName: "Visual Studio 17 2022"
-      vmImage: "windows-2022"
 
 - name: archList
   type: object
