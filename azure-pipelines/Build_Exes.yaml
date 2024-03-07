@@ -67,6 +67,7 @@ jobs:
         echo ##vso[task.prependpath]%ProgramFiles%\\cmake\\bin
         cmake.exe --system-information
         cmake.exe -E env CXXFLAGS="${{ v.CXXFLAGS }}" LDFLAGS="${{ v.LDFLAGS }}" cmake.exe --debug-output --trace ${{ parameters.cmakeAlwaysFlags }} ${{ v.CMAKEFLAGS }} -G "${{ parameters.cmakeGenName }}" ${{ parameters.cmakeGenToolsetArg }} ..
+        cat CMakeFiles/CMakeConfigureLog.yaml
         cmake.exe --build . --verbose --config Debug
         cmake.exe --build . --verbose --config Lite || VER>NUL
         cmake.exe --build . --verbose --config Release
