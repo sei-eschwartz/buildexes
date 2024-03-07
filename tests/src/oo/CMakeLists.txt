@@ -12,7 +12,7 @@ if(WIN32)
     set(CMAKE_CXX_FLAGS_LITE "/Zi /nologo /W3 /WX- /O2 /Ob0 /Oy- /DWIN32 /DNDEBUG /D_CONSOLE /D_UNICODE /DUNICODE /Gm- /EHsc /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Gd /analyze- /errorReport:queue" CACHE STRING "")
     set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "/Zi /nologo /W3 /WX- /O2 /Oi /Oy- /DWIN32 /DNDEBUG /D_CONSOLE /D_UNICODE /DUNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Gd /analyze- /errorReport:queue" CACHE STRING "")
   else()
-    message("Unsupported visual studio version. Using cmake defaults.")
+    message("BuildExes: Modern visual studio version. Using cmake defaults.")
   endif()
 
   cmake_policy(SET CMP0091 NEW)
