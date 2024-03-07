@@ -52,11 +52,11 @@ jobs:
       cat $(CHOCOLATEY_CACHE_DIR)\vs.log
       cat C:\ProgramData\chocolatey\logs\chocolatey.log
       fail >nul
-    displayName: Debug
+    displayName: Debug chocolatey failure
     condition: failed()
   - script: |
       echo ##vso[task.prependpath]${{ parameters.extraPath }}
-    displayName: Add extra path
+    displayName: Add extra path ${{ parameters.extraPath }}
     condition: and(succeeded(), ne('${{ parameters.extraPath}}', ''))
   - ${{ each v in parameters.variants }}:
     - script: |
