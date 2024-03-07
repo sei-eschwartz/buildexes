@@ -24,5 +24,4 @@ Architectures:
 
 # Bugs
 
-- 2008 and 2010 should support x86-64 but don't work for some reason
 - 2019 mysteriously stopped working for some reason
