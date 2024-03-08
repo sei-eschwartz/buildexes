@@ -25,4 +25,3 @@ Architectures:
 # Bugs
 
 - 2019 mysteriously stopped working for some reason
-- What is the difference of Release vs RelWithDeb?

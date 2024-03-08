@@ -72,8 +72,8 @@ jobs:
         del Lite\*.ilk || VER>NUL
         cmake.exe --build . --verbose --config Release
         del Release\*.ilk
-        cmake.exe --build . --verbose --config RelWithDebInfo
-        del RelWithDebInfo\*.ilk
+        #cmake.exe --build . --verbose --config RelWithDebInfo
+        #del RelWithDebInfo\*.ilk
         mkdir "%variantDir%"
         move Debug "%variantDir%"
         move Lite "%variantDir%"
