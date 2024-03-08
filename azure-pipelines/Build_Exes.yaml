@@ -67,9 +67,13 @@ jobs:
         echo ##vso[task.prependpath]%ProgramFiles%\\cmake\\bin
         cmake.exe -E env CXXFLAGS="${{ v.CXXFLAGS }}" LDFLAGS="${{ v.LDFLAGS }}" cmake.exe ${{ parameters.cmakeAlwaysFlags }} ${{ v.CMAKEFLAGS }} -G "${{ parameters.cmakeGenName }}" ${{ parameters.cmakeGenToolsetArg }} ..
         cmake.exe --build . --verbose --config Debug
+        del Debug\*.ilk
         cmake.exe --build . --verbose --config Lite || VER>NUL
+        del Lite\*.ilk || VER>NUL
         cmake.exe --build . --verbose --config Release
+        del Release\*.ilk
         cmake.exe --build . --verbose --config RelWithDebInfo
+        del RelWithDebInfo\*.ilk
         mkdir "%variantDir%"
         move Debug "%variantDir%"
         move Lite "%variantDir%"
