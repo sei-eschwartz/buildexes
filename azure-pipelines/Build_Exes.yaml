@@ -68,17 +68,17 @@ jobs:
         cmake.exe -E env CXXFLAGS="${{ v.CXXFLAGS }}" LDFLAGS="${{ v.LDFLAGS }}" cmake.exe ${{ parameters.cmakeAlwaysFlags }} ${{ v.CMAKEFLAGS }} -G "${{ parameters.cmakeGenName }}" ${{ parameters.cmakeGenToolsetArg }} ..
         cmake.exe --build . --verbose --config Debug
         del Debug\*.ilk
-        cmake.exe --build . --verbose --config Lite || VER>NUL
-        del Lite\*.ilk || VER>NUL
+        REM cmake.exe --build . --verbose --config Lite || VER>NUL
+        REM del Lite\*.ilk || VER>NUL
         cmake.exe --build . --verbose --config Release
         del Release\*.ilk
         REM cmake.exe --build . --verbose --config RelWithDebInfo
         REM del RelWithDebInfo\*.ilk
         mkdir "%variantDir%"
         move Debug "%variantDir%"
-        move Lite "%variantDir%"
+        REM move Lite "%variantDir%"
         move Release "%variantDir%"
-        move RelWithDebInfo "%variantDir%"
+        REM move RelWithDebInfo "%variantDir%"
       displayName: Build variant ${{ v.VARIANT }}
       env:
         variantDir: "$(PUBLISH_DIR)\\${{ parameters.name }}\\${{ v.VARIANT }}"
