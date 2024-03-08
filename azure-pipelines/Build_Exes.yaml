@@ -67,13 +67,13 @@ jobs:
         echo ##vso[task.prependpath]%ProgramFiles%\\cmake\\bin
         cmake.exe -E env CXXFLAGS="${{ v.CXXFLAGS }}" LDFLAGS="${{ v.LDFLAGS }}" cmake.exe ${{ parameters.cmakeAlwaysFlags }} ${{ v.CMAKEFLAGS }} -G "${{ parameters.cmakeGenName }}" ${{ parameters.cmakeGenToolsetArg }} ..
         cmake.exe --build . --verbose --config Debug
-        del Debug\*.ilk
+        del Debug\*.ilk Debug\*.iobj Debug\*.ipdb
         REM cmake.exe --build . --verbose --config Lite || VER>NUL
-        REM del Lite\*.ilk || VER>NUL
+        REM del Lite\*.ilk Lite\*.iobj Lite\*.ipdb || VER>NUL
         cmake.exe --build . --verbose --config Release
-        del Release\*.ilk
+        del Release\*.ilk Release\*.iobj Release\*.ipdb
         REM cmake.exe --build . --verbose --config RelWithDebInfo
-        REM del RelWithDebInfo\*.ilk
+        REM del RelWithDebInfo\*.ilk RelWithDebInfo\*.iobj RelWithDebInfo\*.ipdb
         mkdir "%variantDir%"
         move Debug "%variantDir%"
         REM move Lite "%variantDir%"
