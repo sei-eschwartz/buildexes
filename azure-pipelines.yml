@@ -86,10 +86,10 @@ parameters:
       cmakeArch: 'win32'
       toolsetArch: 'x86'
 
-    - name: 'x86_64'
-      displayName: 'x86-64'
-      cmakeArch: 'x64'
-      toolsetArch: 'x64'
+    # - name: 'x86_64'
+    #   displayName: 'x86-64'
+    #   cmakeArch: 'x64'
+    #   toolsetArch: 'x64'
 
 variables:
   CHOCOLATEY_CACHE_DIR: $(Pipeline.Workspace)\chocolatey_cache
