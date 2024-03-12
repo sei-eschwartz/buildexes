@@ -72,13 +72,13 @@ jobs:
         REM del Lite\*.ilk Lite\*.iobj Lite\*.ipdb || VER>NUL
         cmake.exe --build . --verbose --config Release
         del Release\*.ilk Release\*.iobj Release\*.ipdb
-        cmake.exe --build . --verbose --config RelWithDebInfo
-        del RelWithDebInfo\*.ilk RelWithDebInfo\*.iobj RelWithDebInfo\*.ipdb
+        REM cmake.exe --build . --verbose --config RelWithDebInfo
+        REM del RelWithDebInfo\*.ilk RelWithDebInfo\*.iobj RelWithDebInfo\*.ipdb
         mkdir "%variantDir%"
         move Debug "%variantDir%"
         REM move Lite "%variantDir%"
         move Release "%variantDir%"
-        move RelWithDebInfo "%variantDir%"
+        REM move RelWithDebInfo "%variantDir%"
       displayName: Build variant ${{ v.VARIANT }}
       env:
         variantDir: "$(PUBLISH_DIR)\\${{ parameters.name }}\\${{ v.VARIANT }}"
