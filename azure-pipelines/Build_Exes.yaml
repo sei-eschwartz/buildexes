@@ -12,15 +12,15 @@ parameters:
     - CXXFLAGS: ""
       LDFLAGS: ""
       VARIANT: "normal"
-      CMAKEFLAGS: "-D CMAKE_MSVC_WPO=OFF"
+      CMAKEFLAGS: "-D CMAKE_USE_WPO=OFF"
     - CXXFLAGS: ""
       LDFLAGS: ""
       VARIANT: "wpo"
-      CMAKEFLAGS: "-D CMAKE_MSVC_WPO=ON"
+      CMAKEFLAGS: "-D CMAKE_USE_WPO=ON"
     - CXXFLAGS: ""
       LDFLAGS: ""
       VARIANT: "static"
-      CMAKEFLAGS: "-D CMAKE_MSVC_WPO=OFF -D CMAKE_MSVC_STATIC=ON"
+      CMAKEFLAGS: "-D CMAKE_USE_WPO=OFF -D CMAKE_MSVC_STATIC=ON"
 
 jobs:
 - job: Build_Exes_${{parameters.name}}

@@ -26,14 +26,17 @@ set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /DEBUG /OP
 # set the project name
 project(PharosTests)
 
+option(CMAKE_USE_WPO "Whole Program Optimization" OFF)
+
 if(WIN32)
-  option(CMAKE_MSVC_WPO "Whole Program Optimization" OFF)
   # Add static option
   option(CMAKE_MSVC_STATIC "Statically link CRT" OFF)
   if(CMAKE_MSVC_STATIC)
+    message(STATUS "Static linking CRT ON")
     set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
   else()
-    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+    message(STATUS "Static linking CRT OFF")
+  set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
   endif()
 
   # Add a Lite configuration if we have one
@@ -56,7 +59,7 @@ FILE(GLOB CXXPROGS *.cpp)
 foreach(CXXFILE ${CXXPROGS})
   get_filename_component(EXENAME ${CXXFILE} NAME_WE)
   add_executable(${EXENAME} ${CXXFILE})
-  if(CMAKE_MSVC_WPO)
+  if(CMAKE_USE_WPO)
     set_property(TARGET ${EXENAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
   else()
     set_property(TARGET ${EXENAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION FALSE)
