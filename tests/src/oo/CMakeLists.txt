@@ -23,13 +23,15 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Zi")
 set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
 
+# MSVC runtime library flags are selected by an abstraction.
+cmake_policy(SET CMP0091 NEW)
+
 # set the project name
 project(PharosTests)
 
 option(CMAKE_USE_WPO "Whole Program Optimization" OFF)
 
-# MSVC runtime library flags are selected by an abstraction.
-cmake_policy(SET CMP0091 NEW)
+
 
 if(WIN32)
   # Add static option
