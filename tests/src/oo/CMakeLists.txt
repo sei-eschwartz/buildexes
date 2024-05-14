@@ -16,24 +16,30 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 #     message("BuildExes: Modern visual studio version. Using cmake defaults.")
 #  endif()
 # 
-#   cmake_policy(SET CMP0091 NEW)
+
 # endif()
 
 # Produce PDBs for Release
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Zi")
 set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
 
+# MSVC runtime library flags are selected by an abstraction.
+cmake_policy(SET CMP0091 NEW)
+
 # set the project name
 project(PharosTests)
 
+option(CMAKE_USE_WPO "Whole Program Optimization" OFF)
+
+
+
 if(WIN32)
-  option(CMAKE_MSVC_WPO "Whole Program Optimization" OFF)
   # Add static option
   option(CMAKE_MSVC_STATIC "Statically link CRT" OFF)
   if(CMAKE_MSVC_STATIC)
     set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
   else()
-    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+  set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
   endif()
 
   # Add a Lite configuration if we have one
@@ -56,7 +62,7 @@ FILE(GLOB CXXPROGS *.cpp)
 foreach(CXXFILE ${CXXPROGS})
   get_filename_component(EXENAME ${CXXFILE} NAME_WE)
   add_executable(${EXENAME} ${CXXFILE})
-  if(CMAKE_MSVC_WPO)
+  if(CMAKE_USE_WPO)
     set_property(TARGET ${EXENAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
   else()
     set_property(TARGET ${EXENAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION FALSE)
