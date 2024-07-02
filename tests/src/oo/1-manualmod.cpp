@@ -8,7 +8,9 @@ struct C0  {
 /* method id 400 */ C0 ();
 C0 (special_constructor);
 };
-struct C2 {};
+struct C2 {
+    C2() {}
+};
 struct C1 : public virtual C0 {
 /* method id 401 */ virtual ~C1 ();
 /* method id 402 */ C1 ();
