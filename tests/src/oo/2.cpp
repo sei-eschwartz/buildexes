@@ -94,7 +94,7 @@ return;
 C2::C2 (special_constructor) : C1(special_constructor ()) {}
 
 /* method id 405 */ C3::C3 () {
-
+    NOINLINE
 }
 C3::C3 (special_constructor) : C2(special_constructor ()) {}
 
