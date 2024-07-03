@@ -196,7 +196,7 @@ class C3    size(8)
 8    +---
 */
 {
- const C3* obj = new C3(special_constructor());
+ const C3* obj = new C3();
  // verify class size
  const size_t vc_size = sizeof(C3);
  const size_t layout_size = 8;
