@@ -1,3 +1,43 @@
+#define NOINLINE { \
+ volatile int compute = 1; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+ compute += compute; \
+}
+
 // type for special constructors
 struct special_constructor {};
 struct abstract_0 { int x; };
@@ -37,11 +77,11 @@ return abstract_0();
 
 }
 /* method id 402 */ C0::C0 () {
-
 }
 C0::C0 (special_constructor)  {}
 
 /* method id 403 */ C1::C1 () {
+    NOINLINE
 return;
 
 }
