@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 set(CMAKE_VERBOSE_MAKEFILE ON)
+project(PharosTests)
 
 # I don't think we need these anymore.
 # if(WIN32)
@@ -26,12 +27,7 @@ set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /DEBUG /OP
 # MSVC runtime library flags are selected by an abstraction.
 cmake_policy(SET CMP0091 NEW)
 
-# set the project name
-project(PharosTests)
-
 option(CMAKE_USE_WPO "Whole Program Optimization" OFF)
-
-
 
 if(WIN32)
   # Add static option
