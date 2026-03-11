@@ -35,8 +35,8 @@ jobs:
 
           - name: vs2012
             displayName: "Visual C++ Express 2012"
-            chocoPackages: "msvisualstudio-2012express msvisualstudio-2013express"
-            cmakeGenName: "Visual Studio 14 2015"
+            chocoPackages: "msvisualstudio-2012express"
+            cmakeGenName: "Visual Studio 17 2022"
             cmakeGenToolsetArg: "-T v110"
             extraPath: 'C:\Windows\Microsoft.NET\Framework\v4.0.30319'
             has64: true
