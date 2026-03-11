@@ -57,6 +57,12 @@ endif()
 
 FILE(GLOB CXXPROGS *.cpp)
 
+# Exclude files requiring C++11 (= default, in-class initializers, make_unique)
+# on pre-VS2013 compilers (MSVC_VERSION < 1800)
+if(MSVC AND MSVC_VERSION LESS 1800)
+  list(FILTER CXXPROGS EXCLUDE REGEX "oo_matrix10\\.cpp")
+endif()
+
 foreach(CXXFILE ${CXXPROGS})
   get_filename_component(EXENAME ${CXXFILE} NAME_WE)
   add_executable(${EXENAME} ${CXXFILE})
