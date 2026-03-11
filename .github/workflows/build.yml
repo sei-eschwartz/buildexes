@@ -98,10 +98,10 @@ jobs:
       PUBLISH_DIR: ${{ github.workspace }}\publish
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Cache chocolatey
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           key: chocolatey-${{ runner.os }}-${{ matrix.vsVersion.chocoPackages }}
           restore-keys: chocolatey-${{ runner.os }}
@@ -182,7 +182,7 @@ jobs:
           }
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.vsVersion.name }}_${{ matrix.arch.name }}
           path: ${{ env.PUBLISH_DIR }}
@@ -193,12 +193,12 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Download all artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: combine
 
       - name: Upload combined artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: AllArtifacts
           path: combine
