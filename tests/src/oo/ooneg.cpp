@@ -12,7 +12,8 @@ struct OtherBase {
 
 struct Base {
 
-  int x = 42;
+  int x;
+  Base() : x(42) {}
 
     virtual int foo() {
         return x;
